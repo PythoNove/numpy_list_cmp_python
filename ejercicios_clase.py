@@ -17,6 +17,7 @@ __version__ = "1.1"
 
 import numpy as np
 import math
+import random
 
 
 def ej1():
@@ -27,8 +28,12 @@ def ej1():
 
     # potencia_2 = lambda x:......
 
+    # potencia_2 = lambda x: x**2
+
     # List de string
-    numeros = [1, -5, 4, 3]
+    
+    # variable = list(map(lambda x:2**x, numeros)
+
 
     # 2)
     # Utilice la función map para mapear una lambda expression
@@ -41,6 +46,9 @@ def ej1():
 
     # numeros_potencia = list(map....)
 
+    numeros = [3, 4, 5, 7]
+    numeros_potencia = list(map(lambda x: x**2, numeros))
+    print(numeros_potencia)
 
 def ej2():
     # Lambda expression
@@ -49,6 +57,9 @@ def ej2():
     # (len) de un string pasado como parámetro
 
     # len_string = lambda......
+
+    len_string = lambda x: len(x)
+    print(len_string('diego'))
 
     # 2)
     # List de string
@@ -64,6 +75,8 @@ def ej2():
 
     # palabras_len = list(map....)
 
+    palabras_len = list(map(lambda x: len(x), palabras))
+    print(palabras_len)
 
 def ej3():
     # Práctica de comprensión de listas
@@ -73,6 +86,8 @@ def ej3():
     # números, conteniendo del 0 al 10 inclusive
 
     # lista_0_10 = [......]
+    lista_0_10 = [x for x in range(11)]
+    print(lista_0_10)
 
     # 2)
     # Generar una lista a partir de comprensión de listas,
@@ -83,7 +98,9 @@ def ej3():
     # Utilizar comprensión de listas para generar essa lista
 
     # tabla_5 = [......]
-
+    tabla_5 = [x*5 for x in range(11)]
+    print(tabla_5)
+    
     # 3)
     # Generar una lista a partir de comprensión de listas,
     # esta lista generada deberá contener 10 números aleatorios,
@@ -91,6 +108,8 @@ def ej3():
     # números posibles de un mes (los números pueden repetirse)
 
     # dias_mes = [.....]
+    dias_mes = [random.randint(1,30) for x in range(10)]
+    print(dias_mes)
 
     pass
 
@@ -106,8 +125,12 @@ def ej4():
     # que no son números, utilizar condicionales para detectarlos
     # reemplazar dicho str "no numérico" por 0
     list_numeros_str = ['5', '-2', '3', '', '7', 'NaN']
-
+    list_abecedario = ['','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
     # lista_numeros_int = [.....]
+
+    for elemento in list_numeros_str:
+        lista_numeros_int = [0 if elemento.find(letra) == -1 else int(elemento) for letra in list_abecedario]
+    print(lista_numeros_int)
 
 
 def ej5():
@@ -128,6 +151,10 @@ def ej5():
 
     # personal_1_10 = [.....]
 
+    personal_1_10 = [x for x in accesos if x <= 10]
+    print(personal_1_10)
+    print('La cantidad de personal es: ', len(personal_1_10))
+
     # 2)
     # Generar una lista por comprensión de la listas "accesos"
     # cuyo ID de personal esté dentro de los ID válidos para ingresar
@@ -139,6 +166,9 @@ def ej5():
     # dentro de "id_validos"
 
     # personal_valido = [.....]
+    personal_valido = [x for x in accesos if x in id_validos]
+    print(personal_valido)
+
     pass
 
 
@@ -148,15 +178,24 @@ def ej6():
     # el cual este acotado entre 0 y 1000
     # De dicho array calcular las siguientes operaciones:
 
+    top = 1000
+
+    v1 = np.arange(top)
+    print(v1)
+    
     # 1)
     # Calcular la suma de todos los elementos en el array
-
+   
     # suma = ....
+    suma = np.sum(v1)
+    print(suma)
 
     # 2)
     # Calcular la diferencia de todos los elementos en el array
 
     # diferencia = ....
+    diferencia = np.sum(v1)                                     # ¿como es la diferencia?
+    print(diferencia)
 
     # 3)
     # Utilizar la funcion "where" para reemplazar los números múltiplos
@@ -166,14 +205,17 @@ def ej6():
     # bastante para saber si un número es múltiplo de "2"
 
     # nuevo_array = ....
+    nuevo_array = np.where(v1 % 5 == 0, 0, v1)
+    print(nuevo_array)
+
     pass
 
 
 if __name__ == '__main__':
     print("Bienvenidos a otra clase de Inove con Python")
-    ej1()
+    # ej1()
     # ej2()
     # ej3()
-    # ej4()
+    ej4()
     # ej5()
     # ej6()

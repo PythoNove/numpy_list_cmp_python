@@ -16,6 +16,7 @@ __email__ = "alumnos@inove.com.ar"
 __version__ = "1.1"
 
 import numpy as np
+import random
 
 
 def ej1():
@@ -41,6 +42,17 @@ def ej1():
 
     Realizar este proceso iterativo hasta cumplir el objetivo
     '''
+    
+    marca = True
+    while marca == True:
+        # 1:
+        lista_numeros = [random.randint(1, 11) for x in range(3)]
+        # 2: 
+        suma = sum(lista_numeros)
+        # 3:
+        if suma <= 21:
+            print(suma, lista_numeros)
+            marca = False
 
 
 def ej2():
@@ -61,6 +73,25 @@ def ej2():
                'Alejandro', 'Leonel', 'Antonio', 'Omar', 'Antonia', 'Amalia',
                'Daniela', 'Sofia', 'Celeste', 'Ramon', 'Jorgelina', 'Anabela']
 
+    nombres_filtrados = []
+    '''
+    for i in range(len(nombres)):
+        for letra in padron:
+            print(nombres[i])
+            punto = nombres[i].find(letra)
+            if punto != -1:
+                nombres_filtrados.append(nombres[i])
+            print(nombres_filtrados)
+    '''
+    # for nombre in nombres:
+    
+    for letra in padron:
+        nombres_filtrados = [nombre for nombre in nombres if nombre.find(letra) == 0]  # find devulve -1 si no se cumple y 0 si se cumple
+        print(nombres_filtrados)
+        
+    
+    print(nombres_filtrados)
+       
     # Se espera obtener:
     # ['Tamara', 'Juan', 'Alberto'......]
 
@@ -152,7 +183,7 @@ def ej5():
 if __name__ == '__main__':
     print("Ejercicios de práctica")
     # ej1()
-    # ej2()
+    ej2()
     # ej3()
     # ej4()
     # ej5()
