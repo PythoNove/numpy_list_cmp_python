@@ -28,7 +28,8 @@ def ej1():
 
     # potencia_2 = lambda x:......
 
-    # potencia_2 = lambda x: x**2
+    potencia_2 = lambda x: x**2
+    print(potencia_2(2))
 
     # List de string
     
@@ -59,7 +60,7 @@ def ej2():
     # len_string = lambda......
 
     len_string = lambda x: len(x)
-    print(len_string('diego'))
+    print(len_string('esta es una cadena de prueba'))
 
     # 2)
     # List de string
@@ -125,13 +126,9 @@ def ej4():
     # que no son números, utilizar condicionales para detectarlos
     # reemplazar dicho str "no numérico" por 0
     list_numeros_str = ['5', '-2', '3', '', '7', 'NaN']
-    list_abecedario = ['','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
-    # lista_numeros_int = [.....]
-
-    for elemento in list_numeros_str:
-        lista_numeros_int = [0 if elemento.find(letra) == -1 else int(elemento) for letra in list_abecedario]
+    lista_numeros_int = [int(numero) if numero.lstrip('+-').isdigit() == True else 0 for numero in list_numeros_str]
     print(lista_numeros_int)
-
+    
 
 def ej5():
     # Utilizar comprensión de listas para filtrar
@@ -178,24 +175,23 @@ def ej6():
     # el cual este acotado entre 0 y 1000
     # De dicho array calcular las siguientes operaciones:
 
-    top = 1000
-
-    v1 = np.arange(top)
-    print(v1)
+    array_1 = np.arange(0, 1001)
+    print(array_1)
     
     # 1)
     # Calcular la suma de todos los elementos en el array
    
     # suma = ....
-    suma = np.sum(v1)
+    suma = np.sum(array_1)
     print(suma)
 
     # 2)
     # Calcular la diferencia de todos los elementos en el array
 
     # diferencia = ....
-    diferencia = np.sum(v1)                                     # ¿como es la diferencia?
-    print(diferencia)
+    # diferencia = np.diff(array_1)
+    # diferencia = np.sum(v1)                                     
+    # print(diferencia)
 
     # 3)
     # Utilizar la funcion "where" para reemplazar los números múltiplos
@@ -205,7 +201,7 @@ def ej6():
     # bastante para saber si un número es múltiplo de "2"
 
     # nuevo_array = ....
-    nuevo_array = np.where(v1 % 5 == 0, 0, v1)
+    nuevo_array = np.where(array_1 % 5 == 0, 0, array_1)
     print(nuevo_array)
 
     pass
@@ -216,6 +212,6 @@ if __name__ == '__main__':
     # ej1()
     # ej2()
     # ej3()
-    ej4()
+    # ej4()
     # ej5()
-    # ej6()
+    ej6()

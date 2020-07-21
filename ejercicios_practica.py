@@ -15,8 +15,9 @@ __author__ = "Inove Coding School"
 __email__ = "alumnos@inove.com.ar"
 __version__ = "1.1"
 
-import numpy as np
+# import numpy as np
 import random
+import math
 
 
 def ej1():
@@ -43,16 +44,18 @@ def ej1():
     Realizar este proceso iterativo hasta cumplir el objetivo
     '''
     
+    acum = 0
     marca = True
     while marca == True:
         # 1:
-        lista_numeros = [random.randint(1, 11) for x in range(3)]
+        acum += 1
+        lista_numeros = [random.randint(1, 10) for x in range(3)]
         # 2: 
         suma = sum(lista_numeros)
         # 3:
         if suma <= 21:
-            print(suma, lista_numeros)
-            marca = False
+            print('Suma de numeros:', suma,'\nLista:', lista_numeros,'\nCantidad de tiradas:', acum)
+            marca = False    
 
 
 def ej2():
@@ -73,28 +76,9 @@ def ej2():
                'Alejandro', 'Leonel', 'Antonio', 'Omar', 'Antonia', 'Amalia',
                'Daniela', 'Sofia', 'Celeste', 'Ramon', 'Jorgelina', 'Anabela']
 
-    nombres_filtrados = []
-    '''
-    for i in range(len(nombres)):
-        for letra in padron:
-            print(nombres[i])
-            punto = nombres[i].find(letra)
-            if punto != -1:
-                nombres_filtrados.append(nombres[i])
-            print(nombres_filtrados)
-    '''
-    # for nombre in nombres:
-    
-    for letra in padron:
-        nombres_filtrados = [nombre for nombre in nombres if nombre.find(letra) == 0]  # find devulve -1 si no se cumple y 0 si se cumple
-        print(nombres_filtrados)
-        
-    
+    nombres_filtrados = [nombre for nombre in nombres for letra in padron if letra in nombre]
     print(nombres_filtrados)
-       
-    # Se espera obtener:
-    # ['Tamara', 'Juan', 'Alberto'......]
-
+    
 
 def ej3():
     print("Un poco de Numpy!")
@@ -111,16 +95,17 @@ def ej3():
     # NO utilizar comprensión de listas, solo utilice la
     # funcion de numpy "np.sin"
 
-    # y_nump =
+    y_nump = np.array(np.sin(x)) 
+    print(y_nump)
 
     # Conjunto de valores "X" en una lista
-    x = list(np.arange(0, 2*np.pi, 0.1))
-
+    
     # Utilizar comprensión de listas para obtener la lista
     # "y_list" que tenga todos los valores obtenidos como resultado
     # de someter cada valor de "X" a la función math.sin
 
-    # y_list =
+    y_list = [round(math.sin(numero), 8) for numero in x]  # redondeo a 8 decimales
+    print(y_list)
 
     # Este es un ejemplo práctico de cuando es útil usar numpy,
     # basicamente siempre que deseen utilizar una función matemática
@@ -129,6 +114,7 @@ def ej3():
 
 
 def ej4():
+    
     print("Acercamiento al uso de datos relacionales")
     # Transformar variable numéricas en categóricas
     # Se dispone del siguiente diccionario que traduce el número ID
@@ -155,6 +141,8 @@ def ej4():
     # de diccionarios que tiene un parametro configurable respecto
     # que sucede sino encuentra la "key" en el diccionario.
 
+    lista_compra_producto = [{id : producto.get(id, 'NaM')} for id in lista_compra_id]
+    print(lista_compra_producto)
 
 def ej5():
     print("Ahora sí! buena suerte :)")
@@ -178,12 +166,50 @@ def ej5():
     dos jugadores y compitan para ver quien sacá la suma de números
     más cercanos a 21 sin pasarse!
     '''
+      
+    print('¡Comencemos a jugar!')
+    cant_part = int(input('Ingrese la cantidad de participantes: ')) 
+    participantes = [input('Ingresa tu nombre: ') for x in range(cant_part)]  
+            
+    list_sumatoria_part = []
+
+    for participante in participantes:
+        opcion = 's'
+        acum_a = 0     
+        print('------------ Jugando', participante,'-------------------------')
+
+        while opcion == 's':
+        
+            lista_a = [random.randint(1,10) for x in range(2)]
+            print(lista_a)
+
+            acum_a += sum(lista_a)
+
+            print('has acumulado', acum_a)
+
+            if acum_a <= 21:
+                opcion = input('¿Deseas tirar otra vez s/n?: ')
+            else:
+                print(acum_a, 'te pasaste....')
+                opcion = 'n'
+                acum_a = 'fuera de juego'
+
+        list_sumatoria_part.append(str(acum_a))
+
+    puntaje = {participantes[x] : list_sumatoria_part[x] for x in range(cant_part)}
+    
+    # Evaluar el valor mas cercano a 21
+    lista_solo_valores = [int(numero) for numero in list_sumatoria_part if numero.isdigit() == True]
+    valor_maximo = max(lista_solo_valores)
+
+    # Informar el/los ganadores
+    ganador_es = [print('Ganador:', participante) for participante, puntaje in puntaje.items() if puntaje == str(valor_maximo)]
 
 
 if __name__ == '__main__':
     print("Ejercicios de práctica")
     # ej1()
-    ej2()
+    # ej2()
     # ej3()
     # ej4()
-    # ej5()
+    ej5()
