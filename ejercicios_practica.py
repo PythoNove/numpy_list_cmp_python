@@ -169,21 +169,26 @@ def ej5():
       
     print('¡Comencemos a jugar!')
     cant_part = int(input('Ingrese la cantidad de participantes: ')) 
-    participantes = [input('Ingresa tu nombre: ') for x in range(cant_part)]  
+    participantes = [input(f'Jugador {x+1} Ingresa tu nombre: ') for x in range(cant_part)]  
             
     list_sumatoria_part = []
 
     for participante in participantes:
         opcion = 's'
-        acum_a = 0     
+        acum_a = 0
         print('------------ Jugando', participante,'-------------------------')
-
+        lista_cartas = []
         while opcion == 's':
-        
-            lista_a = [random.randint(1,10) for x in range(2)]
-            print(lista_a)
 
-            acum_a += sum(lista_a)
+            # Verificamos si la lista está vacia, en ese caso agregamos 2 cartas
+            if not lista_cartas:   
+                lista_cartas = [random.randint(1,10) for x in range(2)]
+            else:  # Si la lista ya tienen cartas, solo agregamos 1
+                lista_cartas.append(random.randint(1,10))
+
+            print(lista_cartas)
+
+            acum_a = sum(lista_cartas)
 
             print('has acumulado', acum_a)
 
@@ -192,14 +197,14 @@ def ej5():
             else:
                 print(acum_a, 'te pasaste....')
                 opcion = 'n'
-                acum_a = 'fuera de juego'
+                #acum_a = 'fuera de juego'
 
         list_sumatoria_part.append(str(acum_a))
 
     puntaje = {participantes[x] : list_sumatoria_part[x] for x in range(cant_part)}
     
     # Evaluar el valor mas cercano a 21
-    lista_solo_valores = [int(numero) for numero in list_sumatoria_part if numero.isdigit() == True]
+    lista_solo_valores = [int(numero) for numero in list_sumatoria_part if int(numero) <= 21]
     valor_maximo = max(lista_solo_valores)
 
     # Informar el/los ganadores
